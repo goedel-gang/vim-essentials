@@ -54,11 +54,23 @@ endif
 " languages. Also lets you use "K" on keywords in a Vim file, for example.
 filetype plugin indent on
 
-" make useful directories in ~/.vim where they don't exist
-call mkdir($HOME . "/.vim", "p")
-for dirname in split("backups swap spell undo")
-    call mkdir($HOME . "/.vim/" . dirname, "p")
-endfor
+if has("patch-8.0.1708") && 0
+    " make useful directories in ~/.vim where they don't exist
+    call mkdir($HOME . "/.vim", "p")
+    for dirname in split("backups swap spell undo")
+        call mkdir($HOME . "/.vim/" . dirname, "p")
+    endfor
+else
+    function! MKDirP(dirname) abort
+        if isdirectory(a:dirname)
+            call mkdir(a:dirname, "p")
+        endif
+    endfunction
+    call MKDirP($HOME . "/.vim")
+    for dirname in split("backups swap spell undo")
+        call MKDirP($HOME . "/.vim/" . dirname)
+    endfor
+endif
 
 " name and shame trailing whitespace
 highlight TrailingWhitespace ctermbg=red guibg=red
