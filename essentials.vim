@@ -127,9 +127,12 @@ set history=10000
 
 " spellcapcheck set to nothing stops vim from whining about capitalisation in
 " the middle of sentences.
-set spelllang=en_gb,nl
 set spellcapcheck=
 set spell
+" You should interactively do `:set spelllang=nl spell`. Then hopefully Vim will
+" download a Dutch spellfile for you, and then you can uncomment this line.
+" set spelllang=en_gb,nl
+
 " Make bad spellings be highlighted a bit more gently
 highlight clear SpellBad
 highlight clear SpellRare
