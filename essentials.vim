@@ -62,7 +62,7 @@ if has("patch-8.0.1708") && 0
     endfor
 else
     function! MKDirP(dirname) abort
-        if isdirectory(a:dirname)
+        if !isdirectory(a:dirname)
             call mkdir(a:dirname, "p")
         endif
     endfunction
@@ -127,7 +127,8 @@ set history=10000
 
 " spellcapcheck set to nothing stops vim from whining about capitalisation in
 " the middle of sentences.
-set spelllang=en_gb,nl spellcapcheck=
+set spelllang=en_gb,nl
+set spellcapcheck=
 set spell
 " Make bad spellings be highlighted a bit more gently
 highlight clear SpellBad
