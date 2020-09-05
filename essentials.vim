@@ -9,9 +9,13 @@
 " FIGMENTIZE: essentials
 
 " The idea of this file is to be a complete vimrc containing the bare essentials
-" for a good quality-of-life experience with editing in Vim. It
-" contains only vanilla Vim, with some control structures. It consists of
-" annotated excerpts from what was my vimrc at the time of writing.
+" for a good quality-of-life experience with editing in Vim. It only executes
+" vanilla Vim by default, with some control structures that try to accommodate
+" different versions of Vim, somewhat. There is an optional section to do with
+" plugins at the end.
+
+" This file consists mostly of annotated excerpts from what was my vimrc at the
+" time of writing.
 
 " This is according to my own personal definition of "essential". Other users
 " may wish to remove more.
