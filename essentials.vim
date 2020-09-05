@@ -1,10 +1,11 @@
 " vim: ai fdl=0 fdm=marker fmr={{{,}}}
+
 "                                          __   .__         .__
 "   ____    ______  ______  ____    ____ _/  |_ |__|_____   |  |    ______
 " _/ __ \  /  ___/ /  ___/_/ __ \  /    \\   __\|  |\__  \  |  |   /  ___/
 " \  ___/  \___ \  \___ \ \  ___/ |   |  \|  |  |  | / __ \_|  |__ \___ \
 "  \___  >/____  >/____  > \___  >|___|  /|__|  |__|(____  /|____//____  >
-      \/      \/      \/      \/      \/                \/            \/
+"      \/      \/      \/      \/      \/                \/            \/
 " FIGMENTIZE: essentials
 
 " The idea of this file is to be a complete vimrc containing the bare essentials
@@ -72,7 +73,7 @@ else
     endfor
 endif
 
-" name and shame trailing whitespace
+" name and shame trailing whitespace:          
 highlight TrailingWhitespace ctermbg=red guibg=red
 augroup TrailingWhitespaceMatch
     autocmd! VimEnter,WinEnter * match TrailingWhitespace /\s\+$/
@@ -271,7 +272,7 @@ set shortmess=atToO
 set nrformats=bin,hex,alpha
 
 " name and shame any actual tabs. Lets you visually distinguish between tabs and
-" spaces. Try typing a tab with <C-v><Tab> in insert-mode.
+" spaces. Here: 	 is a tab.
 set list
 if has("patch-8.1.0759")
     set listchars=tab:<->
@@ -296,7 +297,6 @@ highlight ColorColumn term=underline ctermbg=237 guibg=#3c3836
 set linebreak
 set breakindent
 set display+=lastline
-" Just to avoid trailing whitespace, for general linting purposes
 let &g:showbreak = "+++ "
 
 " backspace, space, ~ can go between lines in normal/visual mode
@@ -454,7 +454,6 @@ endfunction
 
 nnoremap <C-n> :call CNTabCycle()<CR>
 nnoremap <C-p> :call CPTabCycle()<CR>
-
 
 " remap <C-[hjk]> to jump quickly between splits. they were useless anyway, and
 " we store <C-l> in g<C-l>
