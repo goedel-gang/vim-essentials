@@ -20,6 +20,9 @@
 " inside them by standing on one and typing zo. You can close a fold again with
 " zc, or you can close them all with zM, or open them all with zR.
 
+" You can launch a demonstrative vim instance editing this file that uses this
+" file as vimrc, by typing "make".
+
 " {{{ PREAMBLE
 
 set encoding=utf-8
@@ -546,5 +549,89 @@ command! MakeScratch setlocal buftype=nofile bufhidden=hide noswapfile nobuflist
 command! -nargs=+ -complete=command Redir new
             \ | call append(line("."), split(execute(<q-args>), "\n"))
             \ | MakeScratch
+
+" }}}
+
+" {{{ PLUGINS
+
+" This part contains just a few of my most favourite plugins. If you have the
+" ability to install a few plugins, I recommend doing so. To make this work
+" properly, you should put the file autoload/plug.vim in
+" ~/.vim/autoload/plug.vim. Then get rid of the runtimepath bit below, and make
+" sure the following section is sourced somewhere in a vimrc. Then, in vim, type
+" :PlugInstall
+
+" Experimentally, if you run "make plug_demo", the following will be loaded
+" anyway. Again, type :PlugInstall.
+
+if $DO_PLUG_DEMO == "1"
+    if has("patch-8.0.1708")
+        call mkdir($HOME . "/.vim/bundle", "p")
+    else
+        call MKDirP($HOME . "/.vim/bundle")
+    endif
+
+    set runtimepath+=$PWD
+
+    call plug#begin('~/.vim/bundle')
+
+    " Plug plug itself in order to generate documentation for it. Lets you
+    " :h vim-plug.
+    Plug 'junegunn/vim-plug'
+
+    " visualise the undo tree in a tree, rather than a flat list, using
+    " :UndoTreeToggle
+    Plug 'mbbill/undotree'
+
+    " Text objects for indented blocks, with ii, iI, ai, aI
+    Plug 'michaeljsmith/vim-indent-object'
+
+    " nifty little plugin to show what the targets of f, t, F, T are.
+    Plug 'unblevable/quick-scope'
+
+    " better syntax highlighting for Python (eg f-strings)
+    let g:python_highlight_all = 1
+    Plug 'vim-python/python-syntax', { 'for': 'python' }
+
+    " make all of my parentheses look like clown vomit. Turn on with yo(
+    " see :h cterm-colors
+    let g:rainbow_conf = {
+        \ 'guifgs': ['Grey', 'LightBlue', 'LightGreen', 'LightCyan', 'LightMagenta', 'LightYellow', 'White'],
+        \ 'ctermfgs': ['Grey', 'LightBlue', 'LightGreen', 'LightCyan', 'LightMagenta', 'LightYellow', 'White'],
+        \ }
+    Plug 'luochen1990/rainbow'
+    nnoremap yo( :RainbowToggle<CR>
+
+    " makes gc comment-uncomment lines
+    Plug 'tpope/vim-commentary'
+
+    " allow operations on the surround bits of text objects with the 's' prefix.
+    " eg cs({ changes () to {}
+    " Disable the weird <C-s> mapping to insert surround things in insert mode
+    let g:surround_no_insert_mappings = 1
+    Plug 'tpope/vim-surround'
+    " make . repeat some compatible <Plug> commands,
+    " and provide some infrastructure to do this myself in other places.
+    Plug 'tpope/vim-repeat'
+
+    " This is a dependency for some of the other textobject related plugins
+    Plug 'kana/vim-textobj-user'
+
+    " Access lines as text objects with 'l'
+    Plug 'kana/vim-textobj-line'
+
+    " textobjects for folds with az and iz
+    Plug 'kana/vim-textobj-fold'
+
+    " make ag a textobject for the entire document
+    let g:textobj_entire_no_default_key_mappings=1
+    Plug 'kana/vim-textobj-entire'
+
+    xmap ag <Plug>(textobj-entire-a)
+    omap ag <Plug>(textobj-entire-a)
+
+    call plug#end()
+
+endif
 
 " }}}
