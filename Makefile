@@ -1,4 +1,4 @@
-.PHONY: demo
+.PHONY: demo plug_demo
 
 demo:
 	vim -u essentials.vim essentials.vim
