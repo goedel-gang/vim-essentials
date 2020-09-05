@@ -54,7 +54,7 @@ endif
 " languages. Also lets you use "K" on keywords in a Vim file, for example.
 filetype plugin indent on
 
-if has("patch-8.0.1708") && 0
+if has("patch-8.0.1708")
     " make useful directories in ~/.vim where they don't exist
     call mkdir($HOME . "/.vim", "p")
     for dirname in split("backups swap spell undo")
@@ -406,8 +406,9 @@ noremap g<Space> <Space>
 xnoremap > >gv
 xnoremap < <gv
 
-" Toggle Paste mode, by typing the leader key followed by space.
-nnoremap <Leader>p :set paste!<CR>
+" Toggle Paste mode, by typing the leader key followed by p. Subsequently shows
+" if paste mode is on or not.
+nnoremap <Leader>p :set paste! <bar> set paste?<CR>
 
 " Shortcut to turn highlighting off after a search.
 nnoremap <CR> :nohlsearch<CR>
@@ -464,14 +465,14 @@ nnoremap <C-l> <C-w>l
 " You can still redraw the screen with g<C-l>
 nnoremap g<C-l> <C-l>
 
-" You can free up <C-q> by putting stty -ixon in a shell rc file. Then this
+" You can free up <C-q> by putting `stty -ixon` in a shell rc file. Then this
 " mapping lets you close a window by doing <C-q>.
 " (Its normal functionality in a terminal is to unfreeze it after it's been
 " frozen with <C-s>. This is very annoying so you should turn it off anyway).
 nnoremap <C-q> <C-w>q
 
 " select previously inserted text, in the spirit of gv
-nmap gV `[v`]
+nnoremap gV `[v`]
 
 " Make Q repeat the `qq` macro, rather than enter ex mode.
 noremap Q @q
@@ -501,7 +502,7 @@ nmap <script> <SID>(wresize) <Nop>
 
 
 " easier horizontal scrolling with zllllll and LLLL and hhh and HHHHH
-" as seen in "easier window resizing"
+" as seen in "easier window resizing". Try setting nowrap, and then using these.
 nmap zh zh<SID>(hscroll)
 nmap zl zl<SID>(hscroll)
 nmap zH zH<SID>(hscroll)
