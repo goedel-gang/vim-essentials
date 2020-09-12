@@ -203,9 +203,6 @@ endif
 " allegedly lets you judge repetitions of movement commands, and it looks cool
 " the set number means that the absolute current line number *is* displayed, but
 " the rest are relative.
-
-" Also, they're made absolute again when you go back into insert mode. I think
-" that's kind of cool but I don't know if I'll keep it.
 set number
 set relativenumber
 
@@ -218,7 +215,7 @@ set shiftwidth=0
 set softtabstop=-1
 set shiftround
 
-" when joining lines with ",", don't add 2 spaces after punctuation.
+" when joining lines with "j", don't add 2 spaces after punctuation.
 set nojoinspaces
 
 " t: wrap text at text width
@@ -421,7 +418,7 @@ nnoremap <Leader>p :set paste! <bar> set paste?<CR>
 nnoremap <CR> :nohlsearch<CR>
 " However, in the command-line window I do want CR to be a normal CR, so I
 " automatically unset and reset this mapping. (This part is important if you
-" want the <CR> mapping.
+" want the <CR> mapping).
 augroup CmdWinCRRestore
     autocmd! CmdWinEnter * nnoremap <buffer> <CR> <CR>
 augroup END
