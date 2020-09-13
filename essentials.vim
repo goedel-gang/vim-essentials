@@ -47,7 +47,55 @@ endif
 
 " colour-related options, wrapped in some conditions just to be on the safe side
 if &t_Co > 2 || has("gui_running")
-    syntax enable
+    " If you're using a dark terminal, you should have the following
+    set background=dark
+
+    " Wrapped in if, because doing syntax enable does annoying things like
+    " re-reading modelines
+    if !exists("g:syntax_on")
+        syntax enable
+    endif
+    " This manually picks a nice colourscheme. (it's the usual default for dark
+    " terminals, and should probably be installed)
+    if index(getcompletion('', 'color'), "ron") >= 0
+        colorscheme ron
+    endif
+    " You can use the following to run :SampleSchemes (type :Sam<Tab>) to sample
+    " colourschemes. Go backwards with p or h, and forwards with l or n. Exit
+    " with q or <Esc>. This doesn't apply the additional tweaks that happen
+    " later on in this vimrc with highlight (eg to the cursorcolumn), so don't
+    " judge too harshly based on that.
+    function! SampleSchemes() abort
+        let l:schemes = getcompletion('', 'color')
+        " for some reason execute gives a null byte
+        let l:cur_scheme = execute('colorscheme')[1:]
+        let l:cur_pos = index(l:schemes, l:cur_scheme)
+        if l:cur_pos < 0
+            echoerr "There's a bug in determining the current colourscheme!"
+            " safety return
+            return
+        endif
+        while v:true
+            redraw
+            echo "Current scheme (" . l:cur_pos
+                \ . "): " . l:schemes[l:cur_pos] . ". [phlnq]"
+            let l:user_com = getchar()
+            if l:user_com == char2nr("p") || l:user_com == char2nr("h")
+                if l:cur_pos >= 1
+                    let l:cur_pos -= 1
+                endif
+            elseif l:user_com == char2nr("n") || l:user_com == char2nr("l")
+                if l:cur_pos < len(l:schemes) - 1
+                    let l:cur_pos += 1
+                endif
+            elseif l:user_com == char2nr("q") || l:user_com == char2nr("\<Esc>")
+                break
+            endif
+            execute 'colorscheme ' . l:schemes[l:cur_pos]
+        endwhile
+    endfunction
+    command! SampleSchemes call SampleSchemes()
+
     " do not set hlsearch if it is already set, as this will annoyingly
     " re-highlight searches if you've set :noh
     if !&hlsearch
