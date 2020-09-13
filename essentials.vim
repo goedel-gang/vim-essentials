@@ -638,6 +638,10 @@ if $DO_PLUG_DEMO == "1"
     " nifty little plugin to show what the targets of f, t, F, T are.
     Plug 'unblevable/quick-scope'
 
+    " List of buffers in tabline. Seems fairly minimalistic. This *REALLY* helps
+    " in quickly moving between buffers with the ^N and ^P mappings.
+    Plug 'ap/vim-buftabline'
+
     " better syntax highlighting for Python (eg f-strings)
     let g:python_highlight_all = 1
     Plug 'vim-python/python-syntax', { 'for': 'python' }
