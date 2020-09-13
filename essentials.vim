@@ -640,6 +640,13 @@ if $DO_PLUG_DEMO == "1"
 
     " List of buffers in tabline. Seems fairly minimalistic. This *REALLY* helps
     " in quickly moving between buffers with the ^N and ^P mappings.
+
+    " Don't create <Plug> mappings
+    let g:buftabline_plug_max = 0
+    " Show buffer status
+    let g:buftabline_indicators = v:true
+    " Show buffer numbers
+    let g:buftabline_numbers = 1
     Plug 'ap/vim-buftabline'
 
     " better syntax highlighting for Python (eg f-strings)
