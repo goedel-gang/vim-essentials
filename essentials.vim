@@ -77,8 +77,8 @@ if &t_Co > 2 || has("gui_running")
         endif
         while v:true
             redraw
-            echo "Current scheme (" . l:cur_pos
-                \ . "): " . l:schemes[l:cur_pos] . ". [phlnq]"
+            echo "Current scheme (" . (l:cur_pos + 1) . "/" . len(l:schemes)
+                \ . "): " . l:schemes[l:cur_pos] . " [phlnq]"
             let l:user_com = getchar()
             if l:user_com == char2nr("p") || l:user_com == char2nr("h")
                 if l:cur_pos >= 1
