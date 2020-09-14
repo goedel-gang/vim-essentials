@@ -25,7 +25,9 @@
 " zc, or you can close them all with zM, or open them all with zR.
 
 " You can launch a demonstrative vim instance editing this file that uses this
-" file as vimrc, by typing "make".
+" file as vimrc, by typing "make". To also load the plugin section, run
+" "make plugdemo". To load it in GVim, use "make gdemo" and "make gplugdemo"
+" respectively.
 
 " {{{ PREAMBLE
 
