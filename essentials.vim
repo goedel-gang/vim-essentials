@@ -84,10 +84,10 @@ if &t_Co > 2 || has("gui_running")
             let l:user_com = getchar()
             if l:user_com == char2nr("p") || l:user_com == char2nr("h")
                 let l:cur_pos += len(l:schemes) - 1
-                let l:cur_pos %= len(l:schemes)
+                let l:cur_pos = l:cur_pos % len(l:schemes)
             elseif l:user_com == char2nr("n") || l:user_com == char2nr("l")
                 let l:cur_pos += 1
-                let l:cur_pos %= len(l:schemes)
+                let l:cur_pos = l:cur_pos % len(l:schemes)
             elseif l:user_com == char2nr("q") || l:user_com == char2nr("\<Esc>")
                 break
             endif
