@@ -325,11 +325,13 @@ set nrformats=bin,hex,alpha
 
 " name and shame any actual tabs. Lets you visually distinguish between tabs and
 " spaces. Here: 	 is a tab.
+" Also mark non-breaking spaces as `@` as these
+" can cause weird, hard-to-find bugs.
 set list
 if has("patch-8.1.0759")
-    set listchars=tab:<->
+    set listchars=tab:<->,nbsp:@
 else
-    set listchars=tab:>-
+    set listchars=tab:>-,nbsp:@
 endif
 
 " show hex characters as codes. If you open a binary file, this makes the ^@s
